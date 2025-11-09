@@ -8,6 +8,11 @@ import traceback
 from dotenv import load_dotenv
 load_dotenv()
 from typing import Optional, Dict
+# Define los alcances (scopes) requeridos por Google Sheets API
+scopes = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive"
+]
 
 # --- CONFIGURACIÓN ---
 ACCESS_TOKEN = os.getenv("WHATSAPP_ACCESS_TOKEN")
@@ -30,16 +35,20 @@ WEBHOOK_VERIFY_TOKEN = os.getenv("WEBHOOK_VERIFY_TOKEN")
 #    sheet = None
 
 # --- AUTENTICACIÓN GOOGLE SHEETS ---
-credentials_info = os.getenv("GOOGLE_CREDENTIALS")  # usa tu variable real
+credentials_info = os.getenv("GOOGLE_CREDENTIALS")  # JSON completo de las credenciales
 if credentials_info:
-    creds_dict = json.loads(credentials_info)
-    creds = Credentials.from_service_account_info(creds_dict, scopes=scopes)
-    client = gspread.authorize(creds)
-    sheet = client.open_by_key(SPREADSHEET_ID).sheet1
-    print("✅ Conectado a Google Sheets exitosamente desde GOOGLE_CREDENTIALS")
+    try:
+        creds_dict = json.loads(credentials_info)
+        creds = Credentials.from_service_account_info(creds_dict, scopes=scopes)
+        client = gspread.authorize(creds)
+        sheet = client.open_by_key(SPREADSHEET_ID).sheet1
+        print("✅ Conectado a Google Sheets exitosamente desde GOOGLE_CREDENTIALS")
+    except Exception as e:
+        print(f"❌ Error conectando a Google Sheets: {e}")
+        traceback.print_exc()
+        sheet = None
 else:
-    raise FileNotFoundError("Variable GOOGLE_CREDENTIALS no encontrada")
-
+    raise FileNotFoundError("❌ Variable GOOGLE_CREDENTIALS no encontrada en el entorno")
 
 
 # --- CONFIGURAR SERVIDOR FLASK ---
