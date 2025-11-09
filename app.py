@@ -518,8 +518,8 @@ if __name__ == '__main__':
     print("🚀 Iniciando servidor WhatsApp Bot...")
     print(f"📊 Google Sheet ID: {SPREADSHEET_ID}")
 #    app.run(host='0.0.0.0', port=5000, debug=True)
-    port = int(os.environ.get("PORT", 5000))
+    #port = int(os.environ.get("PORT", 5000))
+    port = int(os.getenv("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
-
 
 #print("✅ Credenciales cargadas correctamente:", "private_key" in credentials_info)
