@@ -15,19 +15,32 @@ PHONE_ID = os.getenv("WHATSAPP_PHONE_ID")
 WHATSAPP_BUSINESS_ACCOUNT_ID = os.getenv("WHATSAPP_BUSINESS_ACCOUNT_ID")
 SPREADSHEET_ID = os.getenv("GOOGLE_SHEET_ID")
 WEBHOOK_VERIFY_TOKEN = os.getenv("WEBHOOK_VERIFY_TOKEN")
-GOOGLE_CREDENTIALS_PATH = os.getenv("GOOGLE_CREDENTIALS_PATH", "credentials.json")
+#GOOGLE_CREDENTIALS_PATH = os.getenv("GOOGLE_CREDENTIALS_PATH", "credentials.json")
 
 
 # --- AUTENTICACIÓN GOOGLE SHEETS ---
-try:
-    scopes = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
-    creds = Credentials.from_service_account_file("credentials.json", scopes=scopes)
+#try:
+#    scopes = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
+#    creds = Credentials.from_service_account_file("credentials.json", scopes=scopes)
+#    client = gspread.authorize(creds)
+#    sheet = client.open_by_key(SPREADSHEET_ID).sheet1
+#    print("✅ Conectado a Google Sheets exitosamente")
+#except Exception as e:
+#    print(f"❌ Error conectando a Google Sheets: {e}")
+#    sheet = None
+
+# --- AUTENTICACIÓN GOOGLE SHEETS ---
+credentials_info = os.getenv("GOOGLE_CREDENTIALS")  # usa tu variable real
+if credentials_info:
+    creds_dict = json.loads(credentials_info)
+    creds = Credentials.from_service_account_info(creds_dict, scopes=scopes)
     client = gspread.authorize(creds)
     sheet = client.open_by_key(SPREADSHEET_ID).sheet1
-    print("✅ Conectado a Google Sheets exitosamente")
-except Exception as e:
-    print(f"❌ Error conectando a Google Sheets: {e}")
-    sheet = None
+    print("✅ Conectado a Google Sheets exitosamente desde GOOGLE_CREDENTIALS")
+else:
+    raise FileNotFoundError("Variable GOOGLE_CREDENTIALS no encontrada")
+
+
 
 # --- CONFIGURAR SERVIDOR FLASK ---
 app = Flask(__name__)
@@ -500,4 +513,4 @@ if __name__ == '__main__':
     app.run(host="0.0.0.0", port=port)
 
 
-print("✅ Credenciales cargadas correctamente:", "private_key" in credentials_info)
+#print("✅ Credenciales cargadas correctamente:", "private_key" in credentials_info)
