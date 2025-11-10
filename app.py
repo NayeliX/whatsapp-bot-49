@@ -131,21 +131,21 @@ def buscar_alumno_por_dni(dni: str) -> Optional[Dict]:
 
 def obtener_mensaje_bienvenida() -> str:
     """Genera el mensaje de bienvenida del bot"""
-    mensaje = "👋 *¡Bienvenido al Bot de Consulta de Estudiantes!*\n\n"
-    mensaje += "📚 Este bot te permite consultar información de estudiantes usando su DNI.\n\n"
-    mensaje += "💡 *¿Cómo usar el bot?*\n"
-    mensaje += "Simplemente envía el DNI del estudiante que deseas consultar.\n\n"
-    mensaje += "📝 *Ejemplo:*\n"
-    mensaje += "Envía: `12345678`\n\n"
-    mensaje += "El bot te responderá con:\n"
-    mensaje += "• DNI del estudiante\n"
-    mensaje += "• Nombre completo\n"
-    mensaje += "• Notas disponibles\n\n"
+    mensaje = "🙌 *Hola, bienvenido al asistente virtual académico del Prof Miguel Barrantes Flores 👨‍🔬*\n\n"
+    mensaje += "Por favor, ingrese el número de DNI del estudiante.\n\n"
+    #mensaje += "💡 *¿Cómo usar el bot?*\n"
+    #mensaje += "Simplemente envía el DNI del estudiante que deseas consultar.\n\n"
+    #mensaje += "📝 *Ejemplo:*\n"
+    #mensaje += "Envía: `12345678`\n\n"
+    #mensaje += "El bot te responderá con:\n"
+    #mensaje += "• DNI del estudiante\n"
+    #mensaje += "• Nombre completo\n"
+    #mensaje += "• Notas disponibles\n\n"
     #mensaje += "🔍 *Comandos disponibles:*\n"
     #mensaje += "• `hola` - Muestra este mensaje de bienvenida\n"
     #mensaje += "• `inicio` - Muestra este mensaje de bienvenida\n"
     #mensaje += "• `[DNI]` - Consulta datos del estudiante\n\n"
-    mensaje += "¡Empieza enviando un DNI! 🚀"
+    #mensaje += "¡Empieza enviando un DNI! 🚀"
     return mensaje
 
 def es_comando_bienvenida(texto: str) -> bool:
