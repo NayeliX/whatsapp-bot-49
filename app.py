@@ -479,7 +479,7 @@ def webhook():
             # Mensaje no reconocido - mostrar bienvenida
             print(f"⚠️ Mensaje no reconocido: {message_text}")
             #respuesta = "❓ *Mensaje no reconocido*\n\n"
-            respuesta += obtener_mensaje_bienvenida()
+            respuesta = obtener_mensaje_bienvenida()
         
         # Enviar respuesta
         print(f"\n📤 ENVIANDO RESPUESTA:")
