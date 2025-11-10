@@ -514,6 +514,10 @@ def health():
         "google_sheets": "connected" if sheet else "disconnected"
     }, 200
 
+@app.route('/')
+def home():
+    return "✅ Bot de WhatsApp activo y funcionando correctamente."
+    
 if __name__ == '__main__':
     print("🚀 Iniciando servidor WhatsApp Bot...")
     print(f"📊 Google Sheet ID: {SPREADSHEET_ID}")
