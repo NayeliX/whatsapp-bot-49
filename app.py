@@ -251,14 +251,14 @@ def formatear_respuesta(alumno: Dict) -> str:
             if fecha_limpia and fecha_limpia.upper() != 'N/A':
                 fecha_formato = fecha_limpia
             else:
-                fecha_formato = "Fecha próxima a publicar"
+                fecha_formato = "-
             
             # Determinar qué mostrar como nota
             # Si tiene nota válida, mostrar la nota; si no, mostrar mensaje
             if nota_limpia and nota_limpia.upper() != 'N/A' and nota_limpia.upper() != '':
                 nota_mostrar = nota_limpia
             else:
-                nota_mostrar = "Aún no se asigna tu nota"
+                nota_mostrar = "-"
             
             # Agregar TODAS las materias, con o sin nota
             materias_con_notas.append((columna, nota_mostrar, fecha_formato))
@@ -269,7 +269,7 @@ def formatear_respuesta(alumno: Dict) -> str:
     if materias_con_notas:
         respuesta += f"\n📊 *Notas:*\n\n"
         for materia, nota, fecha in materias_con_notas:
-            respuesta += f"🧮{materia} ({fecha}): {nota}\n"
+            respuesta += f"🧮{materia} / {fecha}) / {nota}\n"
     else:
         respuesta += f"\n📊 *Notas:*\n"
         respuesta += "   No hay materias disponibles\n"
