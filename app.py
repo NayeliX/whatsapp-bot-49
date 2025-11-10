@@ -472,7 +472,7 @@ def webhook():
                 respuesta = "⚠️ *No se encontró un estudiante con ese DNI.*\n\n"
                 respuesta += "💡 *¿Qué puedes hacer?*\n"
                 respuesta += "• Verifica que el DNI sea correcto\n"
-                respuesta += "• Envía `hola` para ver las instrucciones\n"
+                #respuesta += "• Envía `hola` para ver las instrucciones\n"
                 respuesta += "• Intenta con otro DNI\n\n"
                 respuesta += "📝 *Ejemplo:* Envía `12345678`"
         else:
