@@ -251,7 +251,7 @@ def formatear_respuesta(alumno: Dict) -> str:
             if fecha_limpia and fecha_limpia.upper() != 'N/A':
                 fecha_formato = fecha_limpia
             else:
-                fecha_formato = "-
+                fecha_formato = "-"
             
             # Determinar qué mostrar como nota
             # Si tiene nota válida, mostrar la nota; si no, mostrar mensaje
@@ -269,7 +269,7 @@ def formatear_respuesta(alumno: Dict) -> str:
     if materias_con_notas:
         respuesta += f"\n📊 *Notas:*\n\n"
         for materia, nota, fecha in materias_con_notas:
-            respuesta += f"🧮{materia} / {fecha}) / {nota}\n"
+            respuesta += f"🧮{materia} / {fecha} / {nota}\n"
     else:
         respuesta += f"\n📊 *Notas:*\n"
         respuesta += "   No hay materias disponibles\n"
