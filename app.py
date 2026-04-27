@@ -380,7 +380,7 @@ def webhook():
                     respuesta += "\n\n" + "─" * 30
                     respuesta += "\n¿Deseas consultar otro DNI?\n"
                     respuesta += "3️⃣ *Volver al menú principal*\n\n"
-                    respuesta += obtener_mensaje_bienvenida()
+                    #respuesta += obtener_mensaje_bienvenida()
                 else:
                     respuesta = "⚠️ *No se encontró estudiante con ese DNI.*\n\n"
                     respuesta += "💡 Verifica que el DNI sea correcto e intenta de nuevo.\n\n"
