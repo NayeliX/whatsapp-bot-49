@@ -26,11 +26,11 @@ WEBHOOK_VERIFY_TOKEN = os.getenv("WEBHOOK_VERIFY_TOKEN")
 HOJAS_DISPONIBLES = {
     "1": {
         "nombre": "Ciencia y Tecnología - Quinto de Secundaria",
-        "hoja": "Calificaciones_Evaluaciones"
+        "hoja": "Hoja 1"
     },
     "2": {
         "nombre": "Academia Matemática NIVEL 1",
-        "hoja": "academia_notas"
+        "hoja": "Hoja 2"
     }
 }
 
