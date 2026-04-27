@@ -70,13 +70,20 @@ def obtener_mensaje_ingrese_dni(opcion: str) -> str:
     nombre_hoja = HOJAS_DISPONIBLES[opcion]["nombre"]
     mensaje = f"✅ *{nombre_hoja}* seleccionada\n\n"
     mensaje += "Por favor, ingresa tu número de DNI:\n\n"
-    mensaje += "📝 *Ejemplo:* `12345678`"
+    mensaje += "📝 *Ejemplo:* `12345678`\n\n"
+    mensaje += "─" * 30 + "\n"
+    mensaje += "3️⃣ *Volver al menú principal*"
     return mensaje
 
 def es_opcion_valida(texto: str) -> bool:
     """Verifica si el texto es una opción válida (1 o 2)"""
     texto_limpio = texto.strip()
     return texto_limpio in HOJAS_DISPONIBLES.keys()
+
+def es_opcion_volver_menu(texto: str) -> bool:
+    """Verifica si el usuario quiere volver al menú (opción 3)"""
+    texto_limpio = texto.strip()
+    return texto_limpio == "3"
 
 def es_dni_valido(texto: str) -> bool:
     """Verifica si el texto parece ser un DNI (solo números)"""
@@ -342,17 +349,26 @@ def webhook():
         
         print(f"Estado: {estado_actual}, Opción: {opcion_seleccionada}")
         
-        if estado_actual == 'seleccionar_hoja':
-            if es_opcion_valida(message_text):
-                opcion = message_text.strip()
-                webhook.user_states[numero] = {
-                    'estado': 'ingresar_dni',
-                    'opcion': opcion
-                }
-                respuesta = obtener_mensaje_ingrese_dni(opcion)
-            else:
-                respuesta = "❌ *Opción no válida*\n\n"
-                respuesta += obtener_mensaje_bienvenida()
+        # VERIFICAR SI USUARIO QUIERE VOLVER AL MENÚ (opción 3)
+        if es_opcion_volver_menu(message_text):
+            print(f"🔄 Usuario presionó volver al menú")
+            webhook.user_states[numero] = {'estado': 'seleccionar_hoja'}
+            respuesta = obtener_mensaje_bienvenida()
+        
+        # PERMITIR CAMBIO DE OPCIÓN EN CUALQUIER MOMENTO (1 o 2)
+        elif es_opcion_valida(message_text):
+            print(f"✅ Usuario cambió a opción: {message_text}")
+            opcion = message_text.strip()
+            webhook.user_states[numero] = {
+                'estado': 'ingresar_dni',
+                'opcion': opcion
+            }
+            respuesta = obtener_mensaje_ingrese_dni(opcion)
+        
+        elif estado_actual == 'seleccionar_hoja':
+            # Usuario escribió algo que no es 1 o 2, simplemente mostrar bienvenida
+            print(f"⚠️ Mensaje inicial ignorado: {message_text}")
+            respuesta = obtener_mensaje_bienvenida()
         
         elif estado_actual == 'ingresar_dni':
             if es_dni_valido(message_text):
