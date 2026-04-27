@@ -383,7 +383,9 @@ def webhook():
                 else:
                     respuesta = "⚠️ *No se encontró estudiante con ese DNI.*\n\n"
                     respuesta += "💡 Verifica que el DNI sea correcto e intenta de nuevo.\n\n"
-                    respuesta += "📝 *Ejemplo:* `12345678`"
+                    respuesta += "📝 *Ejemplo:* `12345678`\n\n"
+                    respuesta += "─" * 30 + "\n"
+                    respuesta += "3️⃣ *Volver al menú principal*"
             else:
                 respuesta = "❌ *DNI no válido*\n\n"
                 respuesta += "El DNI debe contener entre 6 y 15 dígitos.\n\n"
